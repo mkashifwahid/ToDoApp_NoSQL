@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>S-Todo App</title>
+    </head>
+    <body>
+        <h1>Todo List</h1>
+        <div> 
+            <form action="{{url_for('add_task')}}" method="POST">
+                Task Title :<input type = "string" name = "taskTitle">
+                Task Desc. :<input type = "text"   name = "taskDescription"> 
+                <input type = "submit">
+            </form>
+        </div>
+        <div>
+            <h2>Incomplete Tasks</h2>
+            <ul>
+                {% for task in incomplete_tasks %}
+                <li>{{task["title"]}} - {{task['description']}} 
+                    <a href="{{ url_for('complete_task',_id = task['id'])}}">Complete</a> 
+                    <a href="{{ url_for('delete_task',_id = task['id'])}}">Delete</a></li>
+                {% endfor %}
+            </ul>
+            <h2>Completed Tasks</h2>
+            <ul>
+                    {% for task in complete_tasks %}
+                    <li>{{task["title"]}} - {{task['description']}} 
+                        <a href="{{ url_for('incomplete_task',_id = task['id'])}}">Incomplete</a> 
+                        <a href="{{ url_for('delete_task',_id = task['id'])}}">Delete</a></li>
+                    {% endfor %}
+                </ul>
+        </form>
+    </div>
+    </body>
+</html>
